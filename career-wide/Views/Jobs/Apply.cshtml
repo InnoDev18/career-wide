@@ -1,0 +1,37 @@
+﻿@model career_wide.Models.Job.JobApplication
+
+@{
+    ViewData["Title"] = "Apply for a job";
+}
+
+<h1>Apply for @ViewData["JobTitle"]</h1>
+
+<form asp-action="Apply"
+      asp-route-id="@Model.JobListingId"
+      method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="ApplicantName" class="form-label"></label>
+        <input asp-for="ApplicantName" class="form-control" />
+        <span asp-validation-for="ApplicantName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="CoverLetter" class="form-label"></label>
+        <textarea asp-for="CoverLetter" class="form-control" rows="6"></textarea>
+        <span asp-validation-for="CoverLetter" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit application</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

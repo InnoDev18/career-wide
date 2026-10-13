@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Career-Wide";
+}
+
+<section class="home-hero rounded-4 p-4 p-md-5 mb-5">
+    <div class="row align-items-center">
+        <div class="col-lg-8">
+            <p class="home-eyebrow">YOUR NEXT OPPORTUNITY STARTS HERE</p>
+
+            <h1 class="display-4 fw-bold text-white mb-3">
+                Find a role that moves you forward.
+            </h1>
+
+            <p class="lead text-white-50 mb-4">
+                Explore current opportunities and take the next step in your career.
+            </p>
+
+            <a asp-controller="Jobs"
+               asp-action="Index"
+               class="btn btn-primary btn-lg">
+                Browse open jobs
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="container pb-5">
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="home-feature h-100">
+                <h2 class="h5">Explore opportunities</h2>
+                <p class="mb-0">Browse available roles and find one that fits your goals.</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="home-feature h-100">
+                <h2 class="h5">Know the details</h2>
+                <p class="mb-0">Review each role’s location, employment type, and closing date.</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="home-feature h-100">
+                <h2 class="h5">Apply online</h2>
+                <p class="mb-0">When you find a suitable role, submit your application online.</p>
+            </div>
+        </div>
+    </div>
+</section>

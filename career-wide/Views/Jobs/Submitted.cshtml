@@ -1,0 +1,12 @@
+﻿@model career_wide.Models.Job.JobListing
+
+@{
+    ViewData["Title"] = "Application submitted";
+}
+
+<div class="alert alert-success">
+    <h1>Application submitted</h1>
+    <p>Your application for <strong>@Model.Title</strong> has been received.</p>
+</div>
+
+<a asp-action="Index" class="btn btn-primary">Back to open jobs</a>

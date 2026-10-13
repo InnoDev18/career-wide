@@ -1,0 +1,40 @@
+﻿@model IEnumerable<career_wide.Models.Job.JobApplication>
+
+@{
+    ViewData["Title"] = "Applications";
+}
+
+<h1>Applications</h1>
+
+@if (!Model.Any())
+{
+    <p>No applications have been submitted yet.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Job</th>
+                <th>Applicant</th>
+                <th>Email</th>
+                <th>Cover letter</th>
+                <th>Applied</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var application in Model)
+            {
+                <tr>
+                    <td>@(application.JobListing?.Title ?? "Job removed")</td>
+                    <td>@application.ApplicantName</td>
+                    <td>
+                        <a href="mailto:@application.Email">@application.Email</a>
+                    </td>
+                    <td>@application.CoverLetter</td>
+                    <td>@application.AppliedOn.ToLocalTime().ToString("g")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

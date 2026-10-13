@@ -1,0 +1,172 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+  color: var(--bs-secondary-color);
+  text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+  text-align: start;
+}
+:root {
+    --cw-dark: #171923;
+    --cw-red: #e31837;
+    --cw-light: #f4f5f7;
+    --cw-muted: #a8abb5;
+}
+
+body {
+    background-color: var(--cw-light);
+    color: var(--cw-dark);
+}
+
+.navbar {
+    background-color: var(--cw-dark) !important;
+}
+
+    .navbar .nav-link,
+    .navbar .navbar-brand {
+        color: #ffffff !important;
+    }
+
+.btn-primary {
+    background-color: var(--cw-red);
+    border-color: var(--cw-red);
+}
+
+    .btn-primary:hover {
+        background-color: #bd1230;
+        border-color: #bd1230;
+    }
+.home-hero {
+    background: linear-gradient(120deg, #171923, #292d3b);
+    border-bottom: 5px solid var(--cw-red);
+    min-height: 340px;
+    display: flex;
+    align-items: center;
+}
+
+.home-eyebrow {
+    color: var(--cw-red);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+}
+
+.home-feature {
+    background-color: #ffffff;
+    border-top: 3px solid var(--cw-red);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 0.25rem 1rem rgba(23, 25, 35, 0.08);
+}
+
+    .home-feature h2 {
+        color: var(--cw-dark);
+    }
+
+    .home-feature p {
+        color: #666a75;
+    }
+/* Admin CRUD pages */
+.container > .row:has(form) > .col-md-4 {
+    max-width: 720px;
+    padding: 2rem;
+    background: #ffffff;
+    border-radius: 1rem;
+    box-shadow: 0 0.4rem 1.5rem rgba(23, 25, 35, 0.1);
+}
+
+.container > div:has(> dl),
+.container > div:has(> form) {
+    padding: 2rem;
+    background: #ffffff;
+    border-radius: 1rem;
+    box-shadow: 0 0.4rem 1.5rem rgba(23, 25, 35, 0.1);
+}
+
+.container h1 {
+    color: var(--cw-dark);
+    font-weight: 700;
+}
+
+.container h4 {
+    color: #666a75;
+}
+
+.container form .form-group {
+    margin-bottom: 1.25rem;
+}
+
+.container form .form-control,
+.container form .form-select {
+    min-height: 44px;
+    border: 1px solid #d8dbe2;
+    border-radius: 0.5rem;
+}
+
+    .container form .form-control:focus,
+    .container form .form-select:focus {
+        border-color: var(--cw-red);
+        box-shadow: 0 0 0 0.2rem rgba(227, 24, 55, 0.15);
+    }
+
+.container form textarea.form-control {
+    min-height: 140px;
+}
+
+.container .table {
+    background: #ffffff;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+    .container .table thead th {
+        background: var(--cw-dark);
+        color: #ffffff;
+        border: 0;
+        white-space: nowrap;
+    }
+
+    .container .table td {
+        padding-top: 0.9rem;
+        padding-bottom: 0.9rem;
+    }
+
+    .container .table tbody tr:hover {
+        background: #fff5f6;
+    }
+
+.container a:not(.btn) {
+    color: var(--cw-red);
+    font-weight: 600;
+}
+
+@media (max-width: 767px) {
+    .container > .row:has(form) > .col-md-4,
+    .container > div:has(> dl),
+    .container > div:has(> form) {
+        padding: 1.25rem;
+    }
+}
