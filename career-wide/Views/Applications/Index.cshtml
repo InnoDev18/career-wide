@@ -19,6 +19,7 @@ else
                 <th>Applicant</th>
                 <th>Email</th>
                 <th>Cover letter</th>
+                <th>CV</th>
                 <th>Applied</th>
             </tr>
         </thead>
@@ -32,6 +33,17 @@ else
                         <a href="mailto:@application.Email">@application.Email</a>
                     </td>
                     <td>@application.CoverLetter</td>
+                    <td>
+                        @if (!string.IsNullOrWhiteSpace(application.CvFileName))
+                        {
+                            <a asp-action="DownloadCv"
+                               asp-route-id="@application.Id">Download CV</a>
+                        }
+                        else
+                        {
+                            <span>No CV uploaded</span>
+                        }
+                    </td>
                     <td>@application.AppliedOn.ToLocalTime().ToString("g")</td>
                 </tr>
             }

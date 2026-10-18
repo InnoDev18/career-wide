@@ -1,13 +1,14 @@
 using career_wide.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using career_wide.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<CareerWideContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
 })
@@ -28,7 +29,7 @@ if (!string.IsNullOrWhiteSpace(adminEmail) &&
     using var scope = app.Services.CreateScope();
 
     var userManager = scope.ServiceProvider
-        .GetRequiredService<UserManager<IdentityUser>>();
+        .GetRequiredService<UserManager<ApplicationUser>>();
 
     var roleManager = scope.ServiceProvider
         .GetRequiredService<RoleManager<IdentityRole>>();
@@ -48,7 +49,7 @@ if (!string.IsNullOrWhiteSpace(adminEmail) &&
 
     if (admin is null)
     {
-        admin = new IdentityUser
+        admin = new ApplicationUser
         {
             UserName = adminEmail,
             Email = adminEmail,

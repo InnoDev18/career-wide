@@ -8,10 +8,12 @@ namespace career_wide.Controllers;
 public class JobsController : Controller
 {
     private readonly CareerWideContext _context;
+    private readonly IWebHostEnvironment _environment;
 
-    public JobsController(CareerWideContext context)
+    public JobsController(CareerWideContext context, IWebHostEnvironment environment)
     {
         _context = context;
+        _environment = environment;
     }
 
     public async Task<IActionResult> Index()
@@ -52,8 +54,9 @@ public class JobsController : Controller
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Apply(
-        int id,
-        [Bind("ApplicantName,Email,CoverLetter")] JobApplication application)
+    int id,
+    [Bind("ApplicantName,Email,CoverLetter")] JobApplication application,
+    IFormFile? cvFile)
     {
         var today = DateTime.Today;
 
@@ -67,6 +70,41 @@ public class JobsController : Controller
         {
             return NotFound();
         }
+        if (!string.IsNullOrWhiteSpace(application.Email))
+        {
+            application.Email = application.Email.Trim();
+            var emailToCheck = application.Email.ToUpper();
+
+            var alreadyApplied = await _context.JobApplications
+                .AnyAsync(existing =>
+                    existing.JobListingId == job.Id &&
+                    existing.Email.ToUpper() == emailToCheck);
+
+            if (alreadyApplied)
+            {
+                ModelState.AddModelError(
+                    nameof(application.Email),
+                    "You have already applied for this job with this email address.");
+            }
+        }
+        string? fileExtension = null;
+
+        if (cvFile is not null)
+        {
+            fileExtension = Path.GetExtension(cvFile.FileName).ToLowerInvariant();
+
+            var allowedExtensions = new[] { ".pdf", ".doc", ".docx" };
+
+            if (!allowedExtensions.Contains(fileExtension))
+            {
+                ModelState.AddModelError("cvFile", "Please upload a PDF or Word document.");
+            }
+
+            if (cvFile.Length == 0 || cvFile.Length > 5 * 1024 * 1024)
+            {
+                ModelState.AddModelError("cvFile", "The CV must be smaller than 5 MB.");
+            }
+        }
 
         if (!ModelState.IsValid)
         {
@@ -77,6 +115,28 @@ public class JobsController : Controller
 
         application.JobListingId = job.Id;
         application.AppliedOn = DateTime.UtcNow;
+
+
+        if (cvFile is not null && fileExtension is not null)
+        {
+            var uploadDirectory = Path.Combine(
+                _environment.ContentRootPath,
+                "App_Data",
+                "ApplicantCvs");
+
+            Directory.CreateDirectory(uploadDirectory);
+
+            var storageName = $"{Guid.NewGuid():N}{fileExtension}";
+            var filePath = Path.Combine(uploadDirectory, storageName);
+
+            await using (var stream = new FileStream(filePath, FileMode.CreateNew))
+            {
+                await cvFile.CopyToAsync(stream);
+            }
+
+            application.CvFileName = Path.GetFileName(cvFile.FileName);
+            application.CvStorageName = storageName;
+        }
 
         _context.JobApplications.Add(application);
         await _context.SaveChangesAsync();

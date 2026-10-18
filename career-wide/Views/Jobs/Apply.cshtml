@@ -8,7 +8,8 @@
 
 <form asp-action="Apply"
       asp-route-id="@Model.JobListingId"
-      method="post">
+      method="post"
+      enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <div class="mb-3">
@@ -27,6 +28,14 @@
         <label asp-for="CoverLetter" class="form-label"></label>
         <textarea asp-for="CoverLetter" class="form-control" rows="6"></textarea>
         <span asp-validation-for="CoverLetter" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label for="cvFile" class="form-label">Upload CV (PDF or Word, optional)</label>
+        <input type="file"
+               id="cvFile"
+               name="cvFile"
+               class="form-control"
+               accept=".pdf,.doc,.docx" />
     </div>
 
     <button type="submit" class="btn btn-primary">Submit application</button>

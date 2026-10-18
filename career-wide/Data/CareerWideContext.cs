@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace career_wide.Data;
 
-public class CareerWideContext : IdentityDbContext
+public class CareerWideContext : IdentityDbContext<ApplicationUser>
 {
     public CareerWideContext(
         DbContextOptions<CareerWideContext> options)

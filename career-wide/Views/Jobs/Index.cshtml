@@ -25,10 +25,16 @@
                                 @job.CompanyName · @job.Location
                             </p>
 
-                            <span class="badge job-type align-self-start mb-3">
+                            <p class="mb-3">
+                                <strong>Employment type:</strong>
                                 @job.EmploymentType
-                            </span>
-
+                            </p>
+                            @if (!string.IsNullOrWhiteSpace(job.SalaryRange))
+                            {
+                                <p class="mb-2">
+                                    <strong>Salary range:</strong> @job.SalaryRange
+                                </p>
+                            }
                             <p class="card-text job-description">
                                 @job.Description
                             </p>

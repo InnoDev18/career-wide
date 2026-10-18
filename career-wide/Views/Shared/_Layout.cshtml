@@ -45,6 +45,41 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
+                    <ul class="navbar-nav ms-auto align-items-sm-center">
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+                            if (!User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link"
+                                       asp-area="Identity"
+                                       asp-page="/Account/Manage/Index">My account</a>
+                                </li>
+                            }
+
+                            <li class="nav-item">
+                                <form method="post"
+                                      asp-area="Identity"
+                                      asp-page="/Account/Logout"
+                                      asp-route-returnUrl="@Url.Action("Index", "Home")">
+                                    <button type="submit" class="btn btn-link nav-link">Log out</button>
+                                </form>
+                            </li>
+                        }
+                        else if (!Context.Request.Path.StartsWithSegments("/Jobs/Apply"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                   asp-area="Identity"
+                                   asp-page="/Account/Login">Log in</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-primary ms-sm-2 my-1"
+                                   asp-area="Identity"
+                                   asp-page="/Account/Register">Register</a>
+                            </li>
+                        }
+                    </ul>
                 </div>
             </div>
         </nav>

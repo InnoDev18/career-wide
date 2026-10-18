@@ -1,0 +1,95 @@
+﻿@model career_wide.Models.ProfileViewModel
+
+@{
+    ViewData["Title"] = "My Profile";
+}
+
+<div class="container py-4">
+    <h1>My Profile</h1>
+    @if (TempData["SuccessMessage"] is string successMessage)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @successMessage
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    <p>Manage your details and CV. You can still apply for jobs without signing in.</p>
+
+    <form asp-action="Index" method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <div class="mb-3">
+            <label asp-for="FirstName" class="form-label"></label>
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="LastName" class="form-label"></label>
+            <input asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="PhoneNumber" class="form-label"></label>
+            <input asp-for="PhoneNumber" class="form-control" />
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Location" class="form-label"></label>
+            <input asp-for="Location" class="form-control" />
+            <span asp-validation-for="Location" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ProfessionalTitle" class="form-label"></label>
+            <input asp-for="ProfessionalTitle" class="form-control" />
+            <span asp-validation-for="ProfessionalTitle" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ProfessionalSummary" class="form-label"></label>
+            <textarea asp-for="ProfessionalSummary" class="form-control" rows="4"></textarea>
+            <span asp-validation-for="ProfessionalSummary" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Skills" class="form-label"></label>
+            <textarea asp-for="Skills" class="form-control" rows="3"></textarea>
+            <span asp-validation-for="Skills" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="LinkedInUrl" class="form-label"></label>
+            <input asp-for="LinkedInUrl" class="form-control" />
+            <span asp-validation-for="LinkedInUrl" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="PortfolioUrl" class="form-label"></label>
+            <input asp-for="PortfolioUrl" class="form-control" />
+            <span asp-validation-for="PortfolioUrl" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+        <label asp-for="CvFile" class="form-label">Upload CV (PDF or Word, max 5 MB)</label>
+         <input asp-for="CvFile" type="file" class="form-control" accept=".pdf,.doc,.docx" />
+        <span asp-validation-for="CvFile" class="text-danger"></span>
+        </div>
+
+        @if (!string.IsNullOrWhiteSpace(Model.CurrentCvFileName))
+          {
+        <p>
+               Current CV: @Model.CurrentCvFileName
+               <a asp-controller="Profile" asp-action="DownloadCv">Download CV</a>
+        </p>
+}
+
+        <button type="submit" class="btn btn-primary">Save profile</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
