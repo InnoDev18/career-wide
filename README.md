@@ -61,4 +61,5 @@ Career-Wide is a job listing and application web app built with ASP.NET Core MVC
 - The included LocalDB connection string is intended for local development. A different connection string is needed for another environment.
 - The administrator account is created from the `AdminUser` values in User Secrets when the application starts.
 - This project is under active development and is not presented as a production deployment.
+- - CV files are stored locally under `App_Data/ApplicantCvs/` and excluded from Git.
 
